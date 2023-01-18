@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PetsAPI.Services;
 using PetsDB;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,17 +11,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<ILibraryService, LibraryService>();
+
 builder.Services.AddDbContext<PetsContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionString"])
 );
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+/*using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<PetsContext>();
     context.Database.Migrate();
-}
+}*/
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

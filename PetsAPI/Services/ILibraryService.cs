@@ -9,7 +9,7 @@ namespace PetsAPI.Services
         Task<OwnerDTO> GetOwnerAsync(int id);
         Task<OwnerDTO> AddOwnerAsync(OwnerAddDTO owner);
         Task<OwnerDTO> UpdateOwnerAsync(OwnerUpdateDTO owner);
-        Task<(bool, string)> DeleteOwnerAsync(int id);
+        Task<(bool, string)> DeleteOwnerAsync(OwnerDTO owner);
 
         Task<List<PetDTO>> GetPetsAsync();
         Task<PetDTO> GetPetAsync(int id);
