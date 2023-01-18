@@ -97,11 +97,10 @@ namespace PetsAPI.Services
         {
             try
             {
-                var isOwner = await _db.Owners.FindAsync(id);
                 var age = ((DateTime.Now - owner.Birth).Days / 365) - 1;
-                _db.Entry(isOwner).State = EntityState.Modified;
+                _db.Entry(owner).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
-                var updatedOwner = await _db.Owners.FindAsync(isOwner.OwnerId);
+                var updatedOwner = await _db.Owners.FindAsync(id);
                 return new OwnerDTO
                 {
                     OwnerId = updatedOwner.OwnerId,
@@ -233,11 +232,10 @@ namespace PetsAPI.Services
         {
             try
             {
-                var isPet = await _db.Pets.FindAsync(id);
                 var age = ((DateTime.Now - pet.PetBirth).Days / 365) - 1;
-                _db.Entry(isPet).State = EntityState.Modified;
+                _db.Entry(pet).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
-                var updatedPet = await _db.Pets.FindAsync(isPet.PetId);
+                var updatedPet = await _db.Pets.FindAsync(id);
                 return new PetDTO
                 {
                     PetId = updatedPet.PetId,
