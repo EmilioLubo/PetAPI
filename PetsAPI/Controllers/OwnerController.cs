@@ -55,7 +55,7 @@ namespace PetsAPI.Controllers
         }
 
         [HttpPut("id")]
-        public async Task<IActionResult> UpdateOwner(OwnerUpdateDTO owner)
+        public async Task<IActionResult> UpdateOwner(int id, OwnerUpdateDTO owner)
         {
             var newOwner = await _libraryService.UpdateOwnerAsync(owner);
 
