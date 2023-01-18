@@ -93,14 +93,14 @@ namespace PetsAPI.Services
             }
         }
 
-        public async Task<OwnerDTO> UpdateOwnerAsync(int id, OwnerUpdateDTO owner)
+        public async Task<OwnerDTO> UpdateOwnerAsync(OwnerUpdateDTO owner)
         {
             try
             {
                 var age = ((DateTime.Now - owner.Birth).Days / 365) - 1;
                 _db.Entry(owner).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
-                var updatedOwner = await _db.Owners.FindAsync(id);
+                var updatedOwner = await _db.Owners.FindAsync(owner.OwnerId);
                 return new OwnerDTO
                 {
                     OwnerId = updatedOwner.OwnerId,
@@ -228,14 +228,14 @@ namespace PetsAPI.Services
             }
         }
 
-        public async Task<PetDTO> UpdatePetAsync(int id, PetUpdateDTO pet)
+        public async Task<PetDTO> UpdatePetAsync( PetUpdateDTO pet)
         {
             try
             {
                 var age = ((DateTime.Now - pet.PetBirth).Days / 365) - 1;
                 _db.Entry(pet).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
-                var updatedPet = await _db.Pets.FindAsync(id);
+                var updatedPet = await _db.Pets.FindAsync(pet.PetId);
                 return new PetDTO
                 {
                     PetId = updatedPet.PetId,
