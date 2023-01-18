@@ -93,11 +93,11 @@ namespace PetsAPI.Services
             }
         }
 
-        public async Task<OwnerDTO> UpdateOwnerAsync(OwnerUpdateDTO owner)
+        public async Task<OwnerDTO> UpdateOwnerAsync(int id, OwnerUpdateDTO owner)
         {
             try
             {
-                var isOwner = await _db.Owners.FindAsync(owner.OwnerId);
+                var isOwner = await _db.Owners.FindAsync(id);
                 var age = ((DateTime.Now - owner.Birth).Days / 365) - 1;
                 _db.Entry(isOwner).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
@@ -138,29 +138,141 @@ namespace PetsAPI.Services
 
         #region Pets
 
-        Task<List<PetDTO>> ILibraryService.GetPetsAsync()
+        public async Task<List<PetDTO>> GetPetsAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var today = DateTime.Now;
+                var getPets = new List<PetDTO>();
+                var pets = await _db.Pets.ToListAsync();
+                foreach (var pet in pets)
+                {
+                    var age = ((today - pet.PetBirth).Days / 365) - 1;
+                    getPets.Add(new PetDTO
+                    {
+                        PetId = pet.PetId,
+                        PetName = pet.PetName,
+                        Type = pet.Type,
+                        Breed = pet.Breed,
+                        Genre = pet.Genre,
+                        Age = age,
+                        OwnerId = pet.OwnerId,
+                        Owner = pet.Owner
+                    });
+                }
+                return getPets;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
-        Task<PetDTO> ILibraryService.GetPetAsync(int id)
+        public async Task<PetDTO> GetPetAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var pet = await _db.Pets.FindAsync(id);
+                var age = ((DateTime.Now - pet.PetBirth).Days / 365) - 1;
+                var getPet = new PetDTO
+                {
+                    PetId = pet.PetId,
+                    PetName = pet.PetName,
+                    Type = pet.Type,
+                    Breed = pet.Breed,
+                    Genre = pet.Genre,
+                    Age = age,
+                    OwnerId = pet.OwnerId,
+                    Owner = pet.Owner
+
+                };
+                return getPet;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
-        Task<PetDTO> ILibraryService.AddPetAsync(PetAddDTO pet)
+        public async Task<PetDTO> AddPetAsync(PetAddDTO pet)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var age = ((DateTime.Now - pet.PetBirth).Days / 365) - 1;
+                await _db.Pets.AddAsync(new Pet
+                {
+                    PetName = pet.PetName,
+                    Type = pet.Type,
+                    Breed = pet.Breed,
+                    Genre = pet.Genre,
+                    PetBirth = pet.PetBirth,
+                    OwnerId = pet.OwnerId
+                });
+                await _db.SaveChangesAsync();
+                var newPet = await _db.Pets.FirstOrDefaultAsync(el => el.OwnerId == pet.OwnerId);
+                return new PetDTO
+                {
+                    PetId = newPet.PetId,
+                    PetName = newPet.PetName,
+                    Type = newPet.Type,
+                    Breed = newPet.Breed,
+                    Genre = newPet.Genre,
+                    Age = age,
+                    OwnerId = newPet.OwnerId,
+                    Owner = newPet.Owner
+                };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
-        Task<PetDTO> ILibraryService.UpdatePetAsync(PetUpdateDTO pet)
+        public async Task<PetDTO> UpdatePetAsync(int id, PetUpdateDTO pet)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var isPet = await _db.Pets.FindAsync(id);
+                var age = ((DateTime.Now - pet.PetBirth).Days / 365) - 1;
+                _db.Entry(isPet).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+                var updatedPet = await _db.Pets.FindAsync(isPet.PetId);
+                return new PetDTO
+                {
+                    PetId = updatedPet.PetId,
+                    PetName = updatedPet.PetName,
+                    Type = updatedPet.Type,
+                    Breed = updatedPet.Breed,
+                    Genre = updatedPet.Genre,
+                    Age = age,
+                    OwnerId = updatedPet.OwnerId,
+                    Owner = updatedPet.Owner
+                };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
-        Task<(bool, string)> ILibraryService.DeletePetAsync(PetDTO pet)
+        public async Task<(bool, string)> DeletePetAsync(PetDTO pet)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var deletePet = await _db.Pets.FindAsync(pet.PetId);
+                if (deletePet == null)
+                {
+                    return (false, "Pet not found");
+                }
+                _db.Pets.Remove(deletePet);
+                await _db.SaveChangesAsync();
+                return (true, "Pet got deleted");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Error.{ex.Message}");
+            }
         }
 
         #endregion Pets
