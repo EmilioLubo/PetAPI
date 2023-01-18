@@ -100,7 +100,7 @@ namespace PetsAPI.Services
                 var age = ((DateTime.Now - owner.Birth).Days / 365) - 1;
                 _db.Entry(owner).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
-                var updatedOwner = await _db.Owners.FindAsync(id)
+                var updatedOwner = await _db.Owners.FindAsync(id);
                 return new OwnerDTO
                 {
                     OwnerId = updatedOwner.OwnerId,
