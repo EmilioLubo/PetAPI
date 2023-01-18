@@ -15,7 +15,7 @@ namespace PetsAPI.Services
         Task<PetDTO> GetPetAsync(int id);
         Task<PetDTO> AddPetAsync(PetAddDTO pet);
         Task<PetDTO> UpdatePetAsync(PetUpdateDTO pet);
-        Task<(bool, string)> DeletePetAsync(int id);
+        Task<(bool, string)> DeletePetAsync(PetDTO pet);
 
     }
 }

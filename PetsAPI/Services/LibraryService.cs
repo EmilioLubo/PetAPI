@@ -97,10 +97,11 @@ namespace PetsAPI.Services
         {
             try
             {
+                var isOwner = await _db.Owners.FindAsync(owner.OwnerId);
                 var age = ((DateTime.Now - owner.Birth).Days / 365) - 1;
-                _db.Entry(owner).State = EntityState.Modified;
+                _db.Entry(isOwner).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
-                var updatedOwner = await _db.Owners.FindAsync(owner.OwnerId);
+                var updatedOwner = await _db.Owners.FindAsync(isOwner.OwnerId);
                 return new OwnerDTO
                 {
                     OwnerId = updatedOwner.OwnerId,
@@ -137,13 +138,7 @@ namespace PetsAPI.Services
 
         #region Pets
 
-        Task<PetDTO> ILibraryService.AddPetAsync(PetAddDTO pet)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        Task<(bool, string)> ILibraryService.DeletePetAsync(int id)
+        Task<List<PetDTO>> ILibraryService.GetPetsAsync()
         {
             throw new NotImplementedException();
         }
@@ -153,13 +148,17 @@ namespace PetsAPI.Services
             throw new NotImplementedException();
         }
 
-        Task<List<PetDTO>> ILibraryService.GetPetsAsync()
+        Task<PetDTO> ILibraryService.AddPetAsync(PetAddDTO pet)
         {
             throw new NotImplementedException();
         }
 
-
         Task<PetDTO> ILibraryService.UpdatePetAsync(PetUpdateDTO pet)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<(bool, string)> ILibraryService.DeletePetAsync(PetDTO pet)
         {
             throw new NotImplementedException();
         }
