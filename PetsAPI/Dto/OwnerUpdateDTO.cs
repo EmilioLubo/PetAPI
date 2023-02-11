@@ -4,6 +4,7 @@ namespace PetsAPI.Dto
 {
     public class OwnerUpdateDTO
     {
+
         [Required, StringLength(maximumLength: 20)]
         public string Name { get; set; }
         [Required, StringLength(maximumLength: 30)]

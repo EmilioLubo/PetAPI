@@ -57,14 +57,16 @@ namespace PetsAPI.Controllers
         [HttpPut("id")]
         public async Task<IActionResult> UpdateOwner(int id, OwnerUpdateDTO owner)
         {
+
             var newOwner = await _libraryService.UpdateOwnerAsync(id, owner);
 
             if (newOwner == null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"{owner.Name} could not be updated");
+                var oldOwner = await _libraryService.GetOwnerAsync(id);
+                return StatusCode(StatusCodes.Status500InternalServerError, $"{oldOwner.Name} could not be updated");
             }
 
-            return StatusCode(StatusCodes.Status201Created, $"{newOwner.Name} has been updated");
+            return StatusCode(StatusCodes.Status201Created, $"{owner.Name} has been updated");
         }
 
         [HttpDelete("id")]
