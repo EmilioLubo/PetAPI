@@ -4,8 +4,6 @@ namespace PetsAPI.Dto
 {
     public class PetUpdateDTO
     {
-        [Key]
-        public int PetId { get; set; }
         [Required, StringLength(maximumLength: 20)]
         public string PetName { get; set; }
         [Required, StringLength(maximumLength: 10)]

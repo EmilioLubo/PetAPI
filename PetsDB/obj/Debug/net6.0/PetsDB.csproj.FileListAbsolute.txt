@@ -26,3 +26,17 @@ C:/Users/User/source/repos/PetsAPI/PetsDB/obj/Debug/net6.0/ref/PetsDB.dll
 /Users/imac/Projects/PetAPI/PetsDB/obj/Debug/net6.0/PetsDB.pdb
 /Users/imac/Projects/PetAPI/PetsDB/obj/Debug/net6.0/PetsDB.genruntimeconfig.cache
 /Users/imac/Projects/PetAPI/PetsDB/obj/Debug/net6.0/ref/PetsDB.dll
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\bin\Debug\net6.0\PetsDB.deps.json
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\bin\Debug\net6.0\PetsDB.runtimeconfig.json
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\bin\Debug\net6.0\PetsDB.dll
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\bin\Debug\net6.0\PetsDB.pdb
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.csproj.AssemblyReference.cache
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.AssemblyInfoInputs.cache
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.AssemblyInfo.cs
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.dll
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\refint\PetsDB.dll
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.pdb
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\PetsDB.genruntimeconfig.cache
+C:\Users\Usuario\Source\Repos\PetAPI\PetsDB\obj\Debug\net6.0\ref\PetsDB.dll

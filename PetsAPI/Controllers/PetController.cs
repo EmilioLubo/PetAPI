@@ -57,11 +57,12 @@ namespace PetsAPI.Controllers
         [HttpPut("id")]
         public async Task<IActionResult> UpdatePet(int id, PetUpdateDTO pet)
         {
-            var newPet = await _libraryService.UpdatePetAsync(pet);
+            var newPet = await _libraryService.UpdatePetAsync(id, pet);
 
             if (newPet == null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"{newPet.PetName} could not be updated");
+                var oldPet = await _libraryService.GetPetAsync(id);
+                return StatusCode(StatusCodes.Status500InternalServerError, $"{oldPet.PetName} could not be updated");
             }
 
             return StatusCode(StatusCodes.Status201Created, $"{newPet.PetName} has been updated");
